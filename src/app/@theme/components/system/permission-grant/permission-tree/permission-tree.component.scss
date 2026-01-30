@@ -1,0 +1,46 @@
+.permission-tree {
+  list-style: none;
+  padding: 0;
+
+  &--root {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    width: 100%;
+
+    > li {
+      list-style: none;
+      margin-right: 12px;
+      margin-bottom: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      /* Fixed column width for parent items so their tops align */
+      flex: 0 0 220px;
+
+      .permission-tree__item {
+        display: block;
+        margin-bottom: 6px;
+      }
+    }
+  }
+
+  &--child {
+    display: block;
+    /* children are stacked vertically inside the parent column and indented slightly */
+    width: 100%;
+    box-sizing: border-box;
+    margin-left: 12px;
+
+    /* make sure the child list stays inside the parent's fixed column */
+    > li {
+      list-style: none;
+      margin-bottom: 6px;
+
+      .permission-tree__item {
+        display: block;
+        padding-left: 8px;
+      }
+    }
+  }
+}

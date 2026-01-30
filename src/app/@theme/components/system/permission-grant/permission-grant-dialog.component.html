@@ -1,0 +1,20 @@
+<nb-card style="max-height: 80vh; display: flex; flex-direction: column;">
+  <nb-card-header>
+    Phân quyền
+  </nb-card-header>
+
+  <nb-card-body style="
+      overflow-y: auto;
+      overflow-x: hidden;
+      width: 100%;
+      display: block;
+    ">
+    <ngx-permission-tree style="width: 100%; display: block;" [permissions]="permissions">
+    </ngx-permission-tree>
+  </nb-card-body>
+
+  <nb-card-footer class="text-right" style="display: flex; gap: 0.75rem; justify-content: flex-end;">
+    <button nbButton status="basic" (click)="close()">Huỷ</button>
+    <button nbButton status="primary" (click)="save()">Lưu</button>
+  </nb-card-footer>
+</nb-card>

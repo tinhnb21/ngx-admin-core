@@ -1,0 +1,34 @@
+<nb-card>
+  <nb-card-header>{{ isAdd ? 'Thêm trạng thái' : 'Sửa trạng thái' }}</nb-card-header>
+  <nb-card-body>
+    <!-- Tên -->
+    <div class="form-group">
+      <label class="label">Tên</label>
+      <input nbInput fullWidth placeholder="Nhập tên" [(ngModel)]="data.name" />
+    </div>
+
+    <!-- Mô tả -->
+    <div class="form-group">
+      <label class="label">Mô tả</label>
+      <textarea nbInput fullWidth rows="3" placeholder="Nhập mô tả" [(ngModel)]="data.description"></textarea>
+    </div>
+
+    <!-- Trạng thái -->
+    <div class="form-group">
+      <label class="label">Trạng thái</label>
+      <nb-select fullWidth [(selected)]="data.status">
+        <nb-option [value]="1">Hoạt động</nb-option>
+        <nb-option [value]="0">Ngừng hoạt động</nb-option>
+      </nb-select>
+    </div>
+  </nb-card-body>
+
+  <nb-card-footer class="footer-actions">
+    <button nbButton status="primary" (click)="save()">
+      {{ isAdd ? 'Thêm mới' : 'Cập nhật' }}
+    </button>
+    <button nbButton status="basic" (click)="cancel()">
+      Huỷ
+    </button>
+  </nb-card-footer>
+</nb-card>

@@ -1,0 +1,22 @@
+@import '@theme/styles/themes';
+
+@include nb-install-component() {
+  nb-card {
+    transform: translate3d(0, 0, 0);
+  }
+
+  .table-wrapper {
+  padding-top: 0;
+}
+
+.custom-search-row {
+  padding: 0.75rem;
+  border: 1px solid var(--border-basic-color-3);
+  border-bottom: none;
+  background: var(--background-basic-color-1);
+}
+
+:host ::ng-deep ng2-smart-table table {
+  margin-top: 0;
+}
+}
