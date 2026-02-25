@@ -3,17 +3,17 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { SmartTableData } from '@core/data/smart-table';
 import { NbDialogService, NbToastrService } from '@nebular/theme';
 import { EditStatusDialogComponent } from '@theme/components/categories/status/edit-status-dialog.component';
-import { AdminApiRoleApiClient, PermissionDto, RoleClaimsDto } from '@core/api/admin-api.service.generated';
+import { AdminApiRoleApiClient, AdminApiUserApiClient, PermissionDto, RoleClaimsDto } from '@core/api/admin-api.service.generated';
 import { ConfirmDeleteDialogComponent } from '@theme/components/common/delete/dialog-confirm.component';
 import { PermissionGrantDialogComponent } from '@theme/components/system/permission-grant/permission-grant-dialog.component';
 import { PermissionNode } from '@theme/components/system/permission-grant/permission-tree/permission-tree.component';
 
 @Component({
-  selector: 'ngx-role',
-  templateUrl: './role.component.html',
-  styleUrls: ['./role.component.scss'],
+  selector: 'ngx-users',
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.scss'],
 })
-export class RoleComponent {
+export class UsersComponent {
   settings = {
     actions: {
       add: true,
@@ -40,10 +40,19 @@ export class RoleComponent {
       id: {
         title: 'ID', type: 'string'
       },
-      name: {
-        title: 'Tên', type: 'string'
+      userName: {
+        title: 'Tài khoản', type: 'string'
       },
-      displayName: { title: 'Tên hiển thị', type: 'string' },
+      fullName: {
+        title: 'Họ tên', type: 'string'
+      },
+      email: { title: 'Email', type: 'string' },
+      isActive: {
+        title: 'Trạng thái',
+        type: 'number',
+        valuePrepareFunction: (value) =>
+          value == true ? 'Hoạt động' : 'Ngừng hoạt động',
+      },
     },
     mode: 'external'
   };
@@ -53,14 +62,16 @@ export class RoleComponent {
   constructor(
     private service: SmartTableData,
     private dialogService: NbDialogService,
-    private roleService: AdminApiRoleApiClient,
+    private userService: AdminApiUserApiClient,
     private toastrService: NbToastrService
   ) {
-    this.roleService
-      .getRolesAllPaging(null, null, 1, 10)
+    this.userService
+      .getAllUsersPaging(null, null, null, null, null, 1, 10)
       .subscribe({
         next: (response) => {
-          this.source.load(response.results);
+          console.log("response.results",response.results);
+          const data = response.results.map((item: any) => ({...item, fullName: `${item.firstName} ${item.lastName}`}));
+          this.source.load(data);
         },
         error: () => {
         },
@@ -153,46 +164,46 @@ export class RoleComponent {
   }
 
   onEdit(event) {
-    this.roleService
-      .getAllRolePermissions(event.data.id)
-      .subscribe({
-        next: (response) => {
-          const listPermission: PermissionNode[] = this.mapToPermissionNodes(response.roleClaims ?? []);
-          this.syncParentChecked(listPermission);
-          this.dialogService.open(PermissionGrantDialogComponent, {
-            context: {
-              roleId: event.data.id,
-              permissions: listPermission
-            },
-            dialogClass: 'wide-dialog',
-          }).onClose.subscribe(result => {
-            if (result) {
-              var roleClaims: RoleClaimsDto[] = [];
-              for (let index = 0; index < result.length; index++) {
-                roleClaims.push(
-                  new RoleClaimsDto({
-                    type: result[index].split('.')[0],
-                    selected: true,
-                    value: result[index],
-                  })
-                );
-              }
+    // this.userService
+    //   .getAllRolePermissions(event.data.id)
+    //   .subscribe({
+    //     next: (response) => {
+    //       const listPermission: PermissionNode[] = this.mapToPermissionNodes(response.roleClaims ?? []);
+    //       this.syncParentChecked(listPermission);
+    //       this.dialogService.open(PermissionGrantDialogComponent, {
+    //         context: {
+    //           roleId: event.data.id,
+    //           permissions: listPermission
+    //         },
+    //         dialogClass: 'wide-dialog',
+    //       }).onClose.subscribe(result => {
+    //         if (result) {
+    //           var roleClaims: RoleClaimsDto[] = [];
+    //           for (let index = 0; index < result.length; index++) {
+    //             roleClaims.push(
+    //               new RoleClaimsDto({
+    //                 type: result[index].split('.')[0],
+    //                 selected: true,
+    //                 value: result[index],
+    //               })
+    //             );
+    //           }
 
-              var updateValues = new PermissionDto({
-                roleId: event.data.id,
-                roleClaims: roleClaims,
-              });
+    //           var updateValues = new PermissionDto({
+    //             roleId: event.data.id,
+    //             roleClaims: roleClaims,
+    //           });
 
-              this.roleService
-                .savePermission(updateValues)
-                .subscribe(() => {
-                  this.toastrService.success('Cập nhật quyền thành công', 'Thành công');
-                });
-            }
-          });
-        },
-        error: () => {
-        },
-      });
+    //           this.roleService
+    //             .savePermission(updateValues)
+    //             .subscribe(() => {
+    //               this.toastrService.success('Cập nhật quyền thành công', 'Thành công');
+    //             });
+    //         }
+    //       });
+    //     },
+    //     error: () => {
+    //     },
+    //   });
   }
 }

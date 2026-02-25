@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SystemComponent } from './system.component';
 import { AuthGuard } from '../../../@core/guards/auth.guard';
 import { RoleComponent } from './role/role.component';
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [{
   path: '',
@@ -17,7 +18,11 @@ const routes: Routes = [{
       component: RoleComponent,
     },
     {
-      path: 'role',
+      path: 'users',
+      component: UsersComponent,
+    },
+    {
+      path: 'roles',
       component: RoleComponent,
     },
   ],

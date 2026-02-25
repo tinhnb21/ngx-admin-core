@@ -11,8 +11,6 @@ export class PermissionGrantDialogComponent {
   @Input() permissions: PermissionNode[] = [];
 
   constructor(protected dialogRef: NbDialogRef<PermissionGrantDialogComponent>) {
-    console.log("roleId", this.roleId);
-    console.log("permissions", this.permissions);
   }
 
   save() {

@@ -23,7 +23,7 @@ import {
 import { AuthInterceptor } from './@core/interceptors/auth.interceptor';
 import { NbAuthModule } from '@nebular/auth';
 import { AuthRoutingModule } from './auth/auth-routing.module';
-import { ADMIN_API_BASE_URL, AdminApiRoleApiClient, AdminApiStatusOfLandApiClient } from '@core/api/admin-api.service.generated';
+import { ADMIN_API_BASE_URL, AdminApiRoleApiClient, AdminApiStatusOfLandApiClient, AdminApiUserApiClient } from '@core/api/admin-api.service.generated';
 import { environment } from '../environments/environment';
 
 @NgModule({
@@ -65,7 +65,8 @@ import { environment } from '../environments/environment';
       useValue: environment.apiUrl,
     },
     AdminApiStatusOfLandApiClient,
-    AdminApiRoleApiClient
+    AdminApiRoleApiClient,
+    AdminApiUserApiClient
   ],
   bootstrap: [AppComponent],
 })

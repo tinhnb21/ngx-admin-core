@@ -45,8 +45,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'layout-outline',
     children: [
       {
+        title: 'Người dùng',
+        link: '/pages/system/users',
+      },
+      {
         title: 'Nhóm quyền',
-        link: '/pages/system/role',
+        link: '/pages/system/roles',
       }
     ],
   },

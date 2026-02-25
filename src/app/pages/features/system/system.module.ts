@@ -5,6 +5,7 @@ import { SystemRoutingModule } from './system-routing.module';
 import { ThemeModule } from '@theme/theme.module';
 import { SystemComponent } from './system.component';
 import { RoleComponent } from './role/role.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { RoleComponent } from './role/role.component';
   ],
   declarations: [
     SystemComponent,
-    RoleComponent
+    RoleComponent,
+    UsersComponent
   ],
 })
 export class SystemModule { }

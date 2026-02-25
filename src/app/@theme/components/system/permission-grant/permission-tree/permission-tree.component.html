@@ -1,12 +1,12 @@
 <ul class="permission-tree" [ngClass]="{ 'permission-tree--child': isChild, 'permission-tree--root': !isChild }">
   <li *ngFor="let node of permissions">
     <div class="permission-tree__item">
-      <nb-checkbox [(checked)]="node.checked" (checkedChange)="toggle(node, $event)">
+      <nb-checkbox [(checked)]="node.checked" (checkedChange)="onToggle(node, $event)">
         {{ node.label }}
       </nb-checkbox>
     </div>
 
-    <ngx-permission-tree *ngIf="node.children?.length" [permissions]="node.children" [isChild]="true">
+    <ngx-permission-tree *ngIf="node.children?.length" [permissions]="node.children" [isChild]="true" (stateChange)="onChildStateChange()">
     </ngx-permission-tree>
   </li>
 </ul>
