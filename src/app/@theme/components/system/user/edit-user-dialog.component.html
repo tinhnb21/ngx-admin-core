@@ -1,0 +1,53 @@
+<nb-card>
+  <nb-card-header>{{ isAdd ? 'Thêm người dùng' : 'Sửa người dùng' }}</nb-card-header>
+  <nb-card-body>
+    <!-- Username -->
+    <div class="form-group">
+      <label class="label">Tài khoản</label>
+      <input nbInput fullWidth placeholder="Nhập tài khoản" [(ngModel)]="data.userName" />
+    </div>
+
+    <!-- Họ tên -->
+    <div class="form-group">
+      <label class="label">Họ tên</label>
+      <input nbInput fullWidth placeholder="Nhập tên" [(ngModel)]="data.fullName" />
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label class="label">Email</label>
+      <input nbInput type="email" fullWidth placeholder="Nhập email" [(ngModel)]="data.email" />
+    </div>
+
+    <!-- Trạng thái -->
+    <div class="form-group">
+      <label class="label">Trạng thái</label>
+      <nb-select fullWidth [(selected)]="data.isActive">
+        <nb-option [value]="true">Hoạt động</nb-option>
+        <nb-option [value]="false">Ngừng hoạt động</nb-option>
+      </nb-select>
+    </div>
+
+    <!-- Ảnh đại diện -->
+    <div class="form-group">
+      <label class="label">Ảnh đại diện</label>
+
+      <!-- Thumbnail -->
+      <div class="avatar-wrapper" *ngIf="avatarPreview || data.avatar">
+        <img class="avatar-thumb" [src]="avatarPreview || data.avatar" (click)="openImage()" />
+      </div>
+
+      <!-- Upload -->
+      <input type="file" accept="image/*" (change)="onAvatarSelected($event)"/>
+    </div>
+  </nb-card-body>
+
+  <nb-card-footer class="footer-actions">
+    <button nbButton status="primary" (click)="save()">
+      {{ isAdd ? 'Thêm mới' : 'Cập nhật' }}
+    </button>
+    <button nbButton status="basic" (click)="cancel()">
+      Huỷ
+    </button>
+  </nb-card-footer>
+</nb-card>

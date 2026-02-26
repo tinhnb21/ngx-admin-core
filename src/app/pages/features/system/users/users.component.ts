@@ -7,6 +7,7 @@ import { AdminApiRoleApiClient, AdminApiUserApiClient, PermissionDto, RoleClaims
 import { ConfirmDeleteDialogComponent } from '@theme/components/common/delete/dialog-confirm.component';
 import { PermissionGrantDialogComponent } from '@theme/components/system/permission-grant/permission-grant-dialog.component';
 import { PermissionNode } from '@theme/components/system/permission-grant/permission-tree/permission-tree.component';
+import { EditUserDialogComponent } from '@theme/components/system/user/edit-user-dialog.component';
 
 @Component({
   selector: 'ngx-users',
@@ -107,7 +108,7 @@ export class UsersComponent {
     };
 
     this.dialogService
-      .open(EditStatusDialogComponent, {
+      .open(EditUserDialogComponent, {
         context: {
           data: newData,
           isAdd: true,
@@ -164,6 +165,18 @@ export class UsersComponent {
   }
 
   onEdit(event) {
+    console.log("event.data",event.data);
+
+    this.dialogService.open(EditUserDialogComponent, {
+      context: {
+        data: event.data,
+      },
+    }).onClose.subscribe(updatedData => {
+      if (updatedData) {
+        this.toastrService.success('Cập nhật thành công', 'Thành công');
+      }
+    });
+
     // this.userService
     //   .getAllRolePermissions(event.data.id)
     //   .subscribe({

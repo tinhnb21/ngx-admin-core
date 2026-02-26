@@ -52,6 +52,8 @@ import { ModalOverlaysRoutingModule } from 'pages/modal-overlays/modal-overlays-
 import { ConfirmDeleteDialogComponent } from './components/common/delete/dialog-confirm.component';
 import { PermissionTreeComponent } from './components/system/permission-grant/permission-tree/permission-tree.component';
 import { PermissionGrantDialogComponent } from './components/system/permission-grant/permission-grant-dialog.component';
+import { EditUserDialogComponent } from './components/system/user/edit-user-dialog.component';
+import { ImagePreviewComponent } from './components/system/user/image-preview.component';
 
 const NB_MODULES = [
   CommonModule,
@@ -89,7 +91,9 @@ const COMPONENTS = [
   EditStatusDialogComponent,
   ConfirmDeleteDialogComponent,
   PermissionTreeComponent,
-  PermissionGrantDialogComponent
+  PermissionGrantDialogComponent,
+  EditUserDialogComponent,
+  ImagePreviewComponent
 ];
 const PIPES = [
   CapitalizePipe,

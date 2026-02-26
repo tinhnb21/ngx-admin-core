@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BaseApiService } from './base-api.service';
 import { Observable } from 'rxjs';
+import { TokenRequest } from './admin-api.service.generated';
 
 export interface LoginRequest {
   username: string;
@@ -63,10 +64,10 @@ export class AuthApiService extends BaseApiService {
     );
   }
 
-  refreshToken(refreshToken: string): Observable<AuthenticatedResult> {
+  refreshToken(tokenRequest: TokenRequest): Observable<AuthenticatedResult> {
     return this.http.post<AuthenticatedResult>(
       `${this.baseUrl}/api/admin/token/refresh`,
-      { refreshToken }
+      tokenRequest
     );
   }
 

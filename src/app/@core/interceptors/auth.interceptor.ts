@@ -5,6 +5,7 @@ import { catchError, filter, switchMap, take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { TokenService } from '../services/token.service';
 import { AuthApiService } from '../api/auth-api.service';
+import { TokenRequest } from '@core/api/admin-api.service.generated';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -59,9 +60,19 @@ export class AuthInterceptor implements HttpInterceptor {
         return throwError(() => null);
       }
 
-      return this.authApi.refreshToken(refreshToken).pipe(
+      const token = this.tokenService.getToken();
+      var tokenRequest = new TokenRequest({
+        accessToken: token!,
+        refreshToken: refreshToken!,
+      });
+
+      return this.authApi.refreshToken(tokenRequest).pipe(
         switchMap(res => {
           this.isRefreshing = false;
+
+          this.tokenService.saveToken(res.token);
+          this.tokenService.saveRefreshToken(res.refreshToken);
+          this.tokenService.saveUser(res);
 
           // Update token
           this.tokenService.setTokens(
