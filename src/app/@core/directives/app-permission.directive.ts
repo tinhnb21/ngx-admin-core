@@ -2,11 +2,11 @@ import { Directive, ElementRef, Input, OnInit, Renderer2, TemplateRef, ViewConta
 import { PermissionService } from "../../@core/services/permissions.service";
 
 @Directive({
-  selector: '[appPermission]',
+  selector: '[ngxPermission]',
 })
 export class AppPermissionDirective implements OnInit {
 
-  @Input('appPermission') permission!: string | string[];
+  @Input('ngxPermission') permission!: string | string[];
   @Input() permissionMode: 'hide' | 'disable' = 'hide';
 
   constructor(
