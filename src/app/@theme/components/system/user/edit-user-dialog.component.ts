@@ -30,7 +30,6 @@ export class EditUserDialogComponent {
 
   onAvatarSelected(event: any) {
     const file = event.target.files[0];
-    console.log(file);
     if (!file) return;
 
     // validate
@@ -42,14 +41,11 @@ export class EditUserDialogComponent {
     this.selectedAvatar = file;
 
     const reader = new FileReader();
-    reader.readAsDataURL(file);
     reader.onload = () => {
       this.avatarPreview = reader.result;
       this.cdr.markForCheck();
-      console.log("this.avatarPreview",this.avatarPreview);
-
     };
-    // reader.readAsDataURL(file);
+    reader.readAsDataURL(file);
   }
 
   openImage() {
