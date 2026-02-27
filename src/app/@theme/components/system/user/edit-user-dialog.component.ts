@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { NbDialogRef, NbDialogService } from '@nebular/theme';
-import { ImagePreviewComponent } from './image-preview.component';
+import { ImagePreviewComponent } from '../../common/preview-image/image-preview.component';
 
 @Component({
   selector: 'ngx-edit-user-dialog',

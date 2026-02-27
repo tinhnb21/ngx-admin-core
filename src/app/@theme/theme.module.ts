@@ -53,7 +53,7 @@ import { ConfirmDeleteDialogComponent } from './components/common/delete/dialog-
 import { PermissionTreeComponent } from './components/system/permission-grant/permission-tree/permission-tree.component';
 import { PermissionGrantDialogComponent } from './components/system/permission-grant/permission-grant-dialog.component';
 import { EditUserDialogComponent } from './components/system/user/edit-user-dialog.component';
-import { ImagePreviewComponent } from './components/system/user/image-preview.component';
+import { ImagePreviewComponent } from './components/common/preview-image/image-preview.component';
 
 const NB_MODULES = [
   CommonModule,
